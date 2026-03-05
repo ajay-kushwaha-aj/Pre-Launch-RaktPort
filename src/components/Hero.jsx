@@ -1,18 +1,29 @@
 import { useState, useEffect } from 'react'
 import logo from '../assets/raktport-logo.jpg'
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzxQOfNL1vAifIXXvPLVjXwdhcYH0nnXVI9-ZNJ2s9VGdViWtEPbthBmgxo9Yasy-M/exec'
+// 1. Updated to match the exact working URL from JoinForm.jsx
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvsDi26IDwcyYKvJ2uj5sb1iKJbttUibyLnILYP2mj6J754UFmWoSIgBUdQydZI1M/exec'
+
 async function submitHeroEmail(email, role) {
-  if (GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzxQOfNL1vAifIXXvPLVjXwdhcYH0nnXVI9-ZNJ2s9VGdViWtEPbthBmgxo9Yasy-M/exec') {
-    console.log('Hero signup:', { email, role }); return
-  }
   try {
     await fetch(GOOGLE_SCRIPT_URL, {
-      method:'POST', mode:'no-cors',
-      headers:{'Content-Type':'text/plain'},
-      body: JSON.stringify({ name:'Hero Form', email, role, source:'Hero Email Capture', timestamp: new Date().toISOString() }),
-    })
-  } catch(e) { console.error(e) }
+      method: 'POST',
+      mode: 'no-cors', // 2. This is REQUIRED to prevent Google Apps Script CORS blocking
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      body: JSON.stringify({ 
+        name: 'Hero Form', 
+        email: email, 
+        role: role, 
+        source: 'RaktPort Hero Section' // Changed slightly so you know exactly which form they used
+      }),
+    });
+    
+    console.log('Hero submission successful!');
+  } catch(e) { 
+    console.error('Hero submission failed:', e); 
+  }
 }
 
 const useCountUp = (target, duration = 2000, delay = 800) => {
