@@ -130,7 +130,7 @@ export default function Hero({ joinRef }) {
         maxWidth:'90vw', textAlign:'center',
       }}>
         <span style={{ width:7, height:7, borderRadius:'50%', background:'#ef4444', display:'inline-block', flexShrink:0, animation:'pulse 2s infinite' }}/>
-        Pre-Launch · Building India's Blood Donation Infrastructure
+        Launching Soon · Building India's Blood Donation Infrastructure
       </div>
 
       {/* Headline */}
